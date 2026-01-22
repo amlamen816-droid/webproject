@@ -1,0 +1,189 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<main style="padding:40px 20px; text-align:center; min-height:80vh;">
+
+    <h2 style="margin-bottom:30px;">سياراتنا الفاخرة</h2>
+
+    <div class="cars-container" style="display:flex; flex-wrap:wrap; gap:20px; justify-content:center;">
+
+        <div class="car-card">
+            <img src="{% static 'assets/images/images/Mercedes G-Class.jpg'%}" alt="Mercedes G-Class">
+            <h3>Mercedes G-Class</h3>
+            <button onclick="requestCar('Mercedes G-Class')">احجز السيارة لتجربة الأداء</button>
+        </div>
+
+        <div class="car-card">
+            <img src="{% static 'assets/images/images/Mercedes-Benz S560 Cabriolet.jpg'%}" alt="Mercedes-Benz S560 Cabriolet">
+            <h3>Mercedes-Benz S560 Cabriolet</h3>
+            <button onclick="requestCar('Mercedes-Benz S560 Cabriolet')">احجز السيارة لتجربة الأداء</button>
+        </div>
+
+        <div class="car-card">
+            <img src="{% static 'assets/images/images/Mercedes X-Class.jpg'%}" alt="Mercedes X-Class">
+            <h3>Mercedes X-Class</h3>
+            <button onclick="requestCar('Mercedes X-Class')">احجز السيارة لتجربة الأداء</button>
+        </div>
+
+        <div class="car-card">
+            <img src="{% static 'assets/images/images/Mercedes-Benz AMG GT Black Series.jpg'%}" alt="Mercedes-Benz AMG GT Black Series">
+            <h3>Mercedes-Benz AMG GT Black Series</h3>
+            <button onclick="requestCar('Mercedes-Benz AMG GT Black Series')">احجز السيارة لتجربة الأداء</button>
+        </div>
+
+        <div class="car-card">
+            <img src="{% static 'assets/images/images/Mercedes-Maybach S-Class S 680.jpg'%}" alt="Mercedes-Maybach S-Class S 680">
+            <h3>Mercedes-Maybach S-Class S 680</h3>
+            <button onclick="requestCar('Mercedes-Maybach S-Class S 680')">احجز السيارة لتجربة الأداء</button>
+        </div>
+
+    </div>
+
+    <!-- رسالة التأكيد -->
+    <div id="confirmation" class="confirmation" style="display:none; margin-top:20px; color:green; font-weight:bold;">
+        ✅ تم إرسال طلبك، سنتواصل معك قريباً
+    </div>
+
+</main>
+
+<!-- نموذج الطلب يظهر كـ Popup فوق كل شيء -->
+<div id="requestForm" class="request-form" style="display:none; 
+    position:fixed; top:50%; left:50%; transform:translate(-50%,-50%);
+    padding:20px; border:2px solid #753f3f; border-radius:12px;
+    background:#fff8f0; z-index:1000; width:90%; max-width:400px;
+    box-shadow:0 4px 15px rgba(0,0,0,0.3);">
+
+    <h3>طلب حجز السيارة</h3>
+    <label>الاسم:</label>
+    <input type="text" id="name" placeholder="أدخل اسمك"><br>
+
+    <label>رقم الهاتف:</label>
+    <input type="text" id="phone" placeholder="أدخل رقمك"><br>
+
+    <label>السيارة المختارة:</label>
+    <input type="text" id="carName" readonly><br>
+
+    <button onclick="confirmRequest()">إرسال الطلب</button>
+    <button onclick="closeRequestForm()" style="margin-top:10px; background:#b71c1c; color:white;">إغلاق</button>
+</div>
+
+<!-- Popup لتكبير الصور -->
+<div class="popup" id="popup">
+    <span id="closeBtn">&times;</span>
+    <img id="popupImg" src="">
+</div>
+
+<style>
+.car-card {
+    width: 220px;
+    background:#fff8f0;
+    border:2px solid #753f3f;
+    border-radius:10px;
+    text-align:center;
+    padding:10px;
+    box-shadow:0 3px 8px rgba(0,0,0,0.2);
+    transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+}
+
+.car-card img {
+    width: 100%;
+    height:120px;
+    object-fit:cover;
+    border-radius:8px;
+    margin-bottom:8px;
+    cursor:pointer;
+}
+
+.car-card h3 { margin:8px 0 5px 0; font-size:15px; }
+.car-card button {
+    padding:6px 10px;
+    background:#753f3f;
+    color:#fff;
+    border:none;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:13px;
+    transition:0.3s;
+}
+
+.car-card button:hover {
+    background:#ffcc00;
+    color:#000;
+}
+
+.car-card:hover {
+    transform: scale(1.02);
+    box-shadow:0 8px 15px rgba(0,0,0,0.3);
+    border-color:#ffcc00;
+}
+
+/* Popup الصور */
+#popup {
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.8);
+    justify-content:center;
+    align-items:center;
+    z-index:10000;
+}
+
+#popup img {
+    max-width:80%;
+    max-height:80%;
+    border-radius:12px;
+    box-shadow:0 0 20px #000;
+}
+
+#closeBtn {
+    position:absolute;
+    top:20px;
+    right:40px;
+    font-size:40px;
+    color:#fff;
+    cursor:pointer;
+}
+</style>
+
+<script>
+function requestCar(car) {
+    document.getElementById("carName").value = car;
+    document.getElementById("requestForm").style.display = "block";
+    document.getElementById("confirmation").style.display = "none";
+}
+
+function confirmRequest() {
+    let name = document.getElementById("name").value.trim();
+    let phone = document.getElementById("phone").value.trim();
+
+    if (name === "" || phone === "") {
+        alert("⚠️ يرجى إدخال الاسم ورقم الهاتف قبل إرسال الطلب");
+        return;
+    }
+
+    document.getElementById("requestForm").style.display = "none";
+    document.getElementById("confirmation").style.display = "block";
+}
+
+function closeRequestForm() {
+    document.getElementById("requestForm").style.display = "none";
+}
+
+// تكبير الصورة عند الضغط
+const popup = document.getElementById("popup");
+const popupImg = document.getElementById("popupImg");
+const closeBtn = document.getElementById("closeBtn");
+
+document.querySelectorAll(".car-card img").forEach(img => {
+    img.addEventListener("click", () => {
+        popup.style.display = "flex";
+        popupImg.src = img.src;
+    });
+});
+
+closeBtn.onclick = () => popup.style.display = "none";
+popup.onclick = e => { if(e.target === popup) popup.style.display = "none"; };
+</script>
+
+{% endblock %}

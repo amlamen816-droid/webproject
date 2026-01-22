@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+{% load static %}
+{% block content %}
+
+<main>
+    <h2>تواصل معنا</h2>
+
+    <form id="contactForm">
+        {% csrf_token %}
+        
+        <label for="name">الاسم:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">البريد الإلكتروني:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="message">رسالتك:</label>
+        <textarea id="message" name="message" rows="5" required></textarea>
+
+        <button type="submit">إرسال</button>
+    </form>
+
+    <!-- رسالة التأكيد -->
+    <div id="confirmation" style="display:none; margin-top:20px; color:green; font-weight:bold;">
+        ✅ تم الإرسال، سنتواصل معك قريباً
+    </div>
+</main>
+
+<script>
+    const form = document.getElementById("contactForm");
+    const confirmation = document.getElementById("confirmation");
+
+    form.addEventListener("submit", function(e) {
+        e.preventDefault(); // يمنع إعادة تحميل الصفحة
+        // هنا يمكن إضافة إرسال البيانات إلى السيرفر إذا حبيتي عبر Ajax
+        form.style.display = "none"; // إخفاء الفورم
+        confirmation.style.display = "block"; // عرض رسالة التأكيد
+    });
+</script>
+
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'main.html' %}
+{% block content %}
+<main class="dashboard-container">
+    <h2>Manage Mercedes Cars</h2>
+    <div class="dash-buttons">
+        <a class="dash-btn" href="{% url 'add_car' %}">➕ Add Car</a>
+    </div>
+
+    <table class="cars-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Model Year</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for car in cars %}
+            <tr>
+                <td>{{ car.id }}</td>
+                <td>{{ car.name }}</td>
+                <td>{{ car.model_year }}</td>
+                <td>{{ car.price }}</td>
+                <td>
+                    <a class="action-btn edit" href="{% url 'edit_car' car.id %}">✏️ Edit</a>
+                    <a class="action-btn delete" href="{% url 'delete_car' car.id %}">🗑️ Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="5">No cars available.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</main>
+
+<style>
+.dashboard-container { max-width:900px; margin:40px auto; padding:20px; background:#f5f5f5; border-radius:12px; font-family:Arial,sans-serif;}
+.dash-buttons { margin-bottom:20px;}
+.dash-btn { text-decoration:none; background:#007bff; color:white; padding:8px 16px; border-radius:8px; margin-right:10px;}
+.dash-btn:hover { background:#0056b3;}
+.cars-table { width:100%; border-collapse:collapse; }
+.cars-table th, .cars-table td { border:1px solid #ddd; padding:10px; text-align:center; }
+.cars-table th { background:#007bff; color:white;}
+.action-btn { text-decoration:none; padding:5px 10px; border-radius:6px; color:white; margin:0 3px;}
+.action-btn.edit { background:#28a745;} .action-btn.edit:hover { background:#1e7e34;}
+.action-btn.delete { background:#dc3545;} .action-btn.delete:hover { background:#a71d2a;}
+</style>
+{% endblock %}

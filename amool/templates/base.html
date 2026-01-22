@@ -1,0 +1,29 @@
+
+{%  extends 'main.html'  %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>موقعي</title>
+    <link rel="stylesheet" href="{% static 'assets/CSS/style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>Mercedes-Benz Store</h1>
+        <nav>
+            <a href="{% url 'home' %}">الرئيسية</a>
+            <a href="{% url 'cars' %}">السيارات</a>
+            <a href="{% url 'about' %}">من نحن</a>
+            <a href="{% url 'contact' %}">اتصل بنا</a>
+            <a href="{% url 'offers' %}">العروض</a>
+            <a href="{% url 'reservation' %}">الحجز</a>
+        </nav>
+    </header>
+
+    {% block content %}
+    {% endblock %}
+
+</body>
+</html>

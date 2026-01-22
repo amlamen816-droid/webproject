@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+{% block content %}
+<main class="form-container">
+    <h2>تأكيد حذف السيارة</h2>
+
+    <p>هل أنت متأكد أنك تريدين حذف السيارة: <strong>{{ car.name }}</strong>؟</p>
+
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit" style="background:red; color:white; padding:8px 16px; border-radius:8px;">حذف</button>
+        <a href="{% url 'admin_dashboard' %}" style="padding:8px 16px; border-radius:8px; text-decoration:none; background:#ccc; color:black;">إلغاء</a>
+    </form>
+</main>
+{% endblock %}

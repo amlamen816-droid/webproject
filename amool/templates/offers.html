@@ -1,0 +1,42 @@
+{%  extends 'main.html'  %}
+{% load static %}
+{% block content %}
+    
+    <main>
+        <h2>عروضنا الخاصة</h2>
+        <div class="offers-list">
+
+            <div class="offer">
+                <img src="{% static 'assets/images/images/Mercedes X-Class.jpg' %}" alt="Mercedes X-Class">
+                <h3>Mercedes X-Class</h3>
+                <p>خصم 10% لمدة محدودة</p>
+            </div>
+
+            <div class="offer">
+                <img src="{% static 'assets/images/images/Mercedes-Benz S560 Cabriolet.jpg' %}" alt="Mercedes-Benz S560 Cabriolet">
+                <h3>Mercedes-Benz S560 Cabriolet</h3>
+                <p>خصم 15% لفترة الصيف</p>
+            </div>
+
+            <div class="offer">
+                <img src="{% static 'assets/images/images/Mercedes-Benz AMG GT Black Series.jpg' %}" alt="Mercedes-Benz AMG GT Black Series">
+                <h3>Mercedes-Benz AMG GT Black Series</h3>
+                <p>خصم 20% على الموديلات الجديدة</p>
+            </div>
+
+            <div class="offer">
+                <img src="{% static 'assets/images/images/Mercedes-Maybach S-Class S 680.jpg' %}" alt="Mercedes-Maybach S-Class S 680">
+                <h3>Mercedes-Maybach S-Class S 680</h3>
+                <p>عرض خاص للزبائن المميزين</p>
+            </div>
+
+            <div class="offer">
+                <img src="{% static 'assets/images/images/Mercedes G-Class.jpg' %}" alt="Mercedes G-Class">
+                <h3>Mercedes G-Class</h3>
+                <p>عرض خاص للزبائن لمدة أسبوع</p>
+            </div>
+
+        </div>
+    </main>
+
+{% endblock %}

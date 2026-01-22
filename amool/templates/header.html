@@ -1,0 +1,23 @@
+{% load static %}
+
+<header>
+        <h1>Mercedes-Benz Store</h1>
+        <nav>
+            <a href="{% url 'reservation' %}">reservation</a>
+            <a href="{% url 'contact' %}">Contact </a> 
+            <a href="{% url 'offers' %}">Offers</a>          
+            <a href="{% url 'cars' %}">Cars</a>
+            <a href="{% url 'about' %}">About </a>
+            <a href="{% url 'home' %}">Home</a>
+            
+            {% if user.is_authenticated and user.is_staff %}
+            <a href="{%url 'admin_dashboard'%}">Dashboard</a>
+{% endif %} 
+        {% if user.is_authenticated %}
+        <a href="{% url 'logout' %}">logout</a>
+        {% else %}
+        <a href="{%url 'login'%}">login</a>
+        {% endif %}
+        </nav>
+</header>
+    

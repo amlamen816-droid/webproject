@@ -1,0 +1,33 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<main class="form-container">
+    <h2>إضافة سيارة جديدة</h2>
+
+    {% if messages %}
+    {% for message in messages %}
+    <p style="color:green;">{{ message }}</p>
+    {% endfor %}
+    {% endif %}
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <label>اسم السيارة:</label>
+        <input type="text" name="name" required>
+
+        <label>سنة الموديل:</label>
+        <input type="number" name="model_year" required>
+
+        <label>السعر:</label>
+        <input type="number" step="0.01" name="price" required>
+
+        <label>الوصف:</label>
+        <textarea name="description"></textarea>
+
+        <label>رفع الصورة:</label>
+        <input type="file" name="image">
+
+        <button type="submit">إضافة</button>
+    </form>
+</main>
+{% endblock %}

@@ -1,0 +1,49 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+<main style="padding:40px 20px; text-align:center; min-height:80vh;">
+    <h2 style="margin-bottom:30px;">سياراتنا الفاخرة</h2>
+
+    <div class="cars-container" style="display:flex; flex-wrap:wrap; gap:25px; justify-content:center;">
+        {% for car in cars %}
+        <div class="car-card">
+            <img src="{{ car.image.url }}" alt="{{ car.name }}">
+            <h3>{{ car.name }} ({{ car.model_year }})</h3>
+            <p>{{ car.description }}</p>
+            <p><strong>Price:</strong> {{ car.price|default:"0.00" }} $</p>
+        </div>
+        {% empty %}
+        <p>لا توجد سيارات حالياً.</p>
+        {% endfor %}
+    </div>
+</main>
+
+<style>
+.car-card {
+    width: 260px;
+    background:#fff8f0;
+    border: 4px solid #753f3f;
+    border-radius:15px;
+    text-align:center;
+    padding:15px;
+    box-shadow:0 6px 15px rgba(0,0,0,0.3);
+    transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+    cursor: pointer;
+}
+.car-card img {
+    width: 100%;
+    height:160px;
+    object-fit:cover;
+    border-radius:12px;
+    margin-bottom:10px;
+}
+.car-card h3 { margin:10px 0 5px 0; }
+.car-card p { font-size:14px; line-height:1.5; }
+.car-card:hover {
+    transform: scale(1.05);
+    box-shadow:0 12px 25px rgba(0,0,0,0.5);
+    border-color:#ffcc00;
+}
+</style>
+{% endblock %}
